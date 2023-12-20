@@ -6,7 +6,7 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 18:32:36 by fsaffiri          #+#    #+#             */
-/*   Updated: 2023/12/20 17:25:38 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:05:56 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ char	*casispeciali(int n)
 {
 	if (n == 0)
 		return (ft_strdup("0"));
-	if (n == -2147483647)
-		return (ft_strdup("-2147483647"));
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	return (0);
 }
 
@@ -45,20 +45,23 @@ char	*ft_itoa(int n)
 {
 	char	*str;
 	size_t	len;
+	size_t	i;
 
-	if (n == 0 || n == -2147483647)
+	if (n == 0 || n == -2147483648)
 		return (casispeciali(n));
 	len = get_numb(n);
 	str = malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	str[len] = '\0';
+	i = 0;
 	if (n < 0)
 	{
 		str[0] = '-';
-		n *= -1;
+		n = -n;
+		i++;
 	}
-	while (len)
+	while (len > i)
 	{
 		str[--len] = (n % 10) + '0';
 		n /= 10;
