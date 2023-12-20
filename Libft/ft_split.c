@@ -6,13 +6,13 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:45:07 by fsaffiri          #+#    #+#             */
-/*   Updated: 2023/12/20 18:06:21 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:57:43 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* size_t	counter(char const *s, char c)
+size_t	counter(char const *s, char c)
 {
 	size_t			j;
 	unsigned int	i;
@@ -32,47 +32,23 @@
 		i++;
 	}
 	return (j);
-} */
-
-/* char	*cut(char *sarr, char const *s, char c)
-{
-	size_t			len;
-	unsigned int	start;
-	unsigned int	i;
-	char			*ptr1;
-
-	start = 0;
-	len = 0;
-	while (s[start] == c)
-		start++;
-	i = start;
-	while (s[i] != c)
-		i++;
-	len = i - start;
-	ptr1 = ft_substr(s, start, len);
-	return (ptr1);
-} */
-
-/* char	**ft_split(char const *s, char c)
-{
-	size_t			i;
-	unsigned int	start;
-	char			*sarr;
-
-	i = counter(s, c);
-	sarr = (char *)malloc((i + 1) * sizeof(char));
-	if (!sarr)
-		return (NULL);
-	start = get_start();
 }
 
-int	main(void)
+char	**principale(char **fin, char const *s, char c, size_t i)
 {
-	unsigned int	i;
-	size_t			ptr;
+	return (fin);
+}
 
-	i = 0;
-	ptr = counter("         ciao mi   chiamo          filippo     ", ' ');
-	printf("%zu", ptr);
-	return (0);
-} */
+char	**ft_split(char const *s, char c)
+{
+	size_t	i;
+	char	**fin;
+
+	if (!s)
+		return (NULL);
+	i = counter(s, c);
+	fin = (char **)malloc((i + 1) * sizeof(char *));
+	if (!fin)
+		return (NULL);
+	return (principale(fin, s, c, i));
+}
