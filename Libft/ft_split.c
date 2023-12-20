@@ -6,13 +6,13 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:45:07 by fsaffiri          #+#    #+#             */
-/*   Updated: 2023/12/19 17:04:08 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:17:34 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	counter(char const *s, char c)
+/* size_t	counter(char const *s, char c)
 {
 	size_t			j;
 	unsigned int	i;
@@ -32,7 +32,7 @@ size_t	counter(char const *s, char c)
 		i++;
 	}
 	return (j);
-}
+} */
 
 /* char	*cut(char *sarr, char const *s, char c)
 {
@@ -53,18 +53,17 @@ size_t	counter(char const *s, char c)
 	return (ptr1);
 } */
 
-char	**ft_split(char const *s, char c)
+/* char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	char	*fin;
-	char	*sarr;
+	size_t			i;
+	unsigned int	start;
+	char			*sarr;
 
 	i = counter(s, c);
 	sarr = (char *)malloc((i + 1) * sizeof(char));
 	if (!sarr)
 		return (NULL);
-	
-	//fin = cut(sarr, s, c);
+	start = get_start();
 }
 
 int	main(void)
@@ -76,4 +75,4 @@ int	main(void)
 	ptr = counter("         ciao mi   chiamo          filippo     ", ' ');
 	printf("%zu", ptr);
 	return (0);
-}
+} */

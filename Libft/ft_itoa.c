@@ -6,63 +6,72 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 18:32:36 by fsaffiri          #+#    #+#             */
-/*   Updated: 2023/12/19 16:29:54 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:25:38 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-int	get_int_len(int n)
+size_t	get_numb(int n)
 {
-	int	len;
+	size_t	count;
 
-	len = 0;
+	count = 0;
 	if (n <= 0)
 	{
-		len = 1;
 		n = -n;
+		count = 1;
 	}
-	while (n > 0)
+	while (n > 9)
 	{
 		n /= 10;
-		len++;
+		count++;
 	}
-	return (len);
+	count += 1;
+	return (count);
+}
+
+char	*casispeciali(int n)
+{
+	if (n == 0)
+		return (ft_strdup("0"));
+	if (n == -2147483647)
+		return (ft_strdup("-2147483647"));
+	return (0);
 }
 
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		len;
+	size_t	len;
 
-	len = get_int_len(n);
-	str = (char *)malloc(len + 1);
+	if (n == 0 || n == -2147483647)
+		return (casispeciali(n));
+	len = get_numb(n);
+	str = malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	str[len] = '\0';
-	if (n == -2147483647)
-		return (ft_strdup(n));
 	if (n < 0)
 	{
 		str[0] = '-';
-		n = -n;
+		n *= -1;
 	}
-	len--;
-	while (len > 0)
+	while (len)
 	{
-		str[len] = n % 10 + '0';
+		str[--len] = (n % 10) + '0';
 		n /= 10;
-		len--;
 	}
 	return (str);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	int		n;
 	char	*str;
 
-	n = -2147483647;
+	n = -6478;
 	str = ft_itoa(n);
 	if (str != NULL)
 	{
@@ -70,6 +79,6 @@ int	main(void)
 		free(str);
 	}
 	else
-		printf("Error: ft_itoa returned NULL\n");
+		printf("Error\n");
 	return (0);
-}
+} */
