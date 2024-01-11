@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 16:27:30 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/11 16:55:45 by fsaffiri         ###   ########.fr       */
+/*   Created: 2024/01/11 16:56:07 by fsaffiri          #+#    #+#             */
+/*   Updated: 2024/01/11 17:03:18 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
 	size_t			i;
-	unsigned char	*ptr;
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
 
-	ptr = (unsigned char *)s;
 	i = 0;
-	while (i < n)
+	ptr1 = (unsigned char *)dst;
+	ptr2 = (unsigned char *)src;
+	if (ptr2 > ptr1)
 	{
-		ptr[i] = 0;
-		i++;
+		while (i < n)
+		{
+			ptr1[i] = ptr2[i];
+			i++;
+		}
 	}
+	else if (ptr2 < ptr1)
+	{
+		while (n > 0)
+		{
+			ptr1[n - 1] = ptr2[n - 1];
+			n--;
+		}
+	}
+	return (dst);
 }
