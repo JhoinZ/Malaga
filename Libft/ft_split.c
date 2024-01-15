@@ -6,7 +6,7 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:45:07 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/11 18:46:48 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:29:47 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,44 +31,40 @@ size_t	counter(char const *s, char c)
 	return (j);
 }
 
-char	*ft_coping(const char *s, size_t n)
+char	**ft_create(char **fin, char c, char const *s)
 {
-	char	*frs;
+	size_t	start;
+	size_t	k;
+	size_t	end;
 
-	frs = (char *)malloc((n + 1) * sizeof(char));
-	if (!frs)
-		return (NULL);
-	frs = ft_strncpy(frs, (char *)s, n);
-	frs[n] = '\0';
-	return (frs);
+	start = 0;
+	k = 0;
+	while (s[start])
+	{
+		while (s[start] == c)
+			start++;
+		end = start;
+		while (s[end] && s[end] != c)
+			end++;
+		if (start < end)
+		{
+			fin[k] = ft_substr(s, start, end - start);
+			k++;
+		}
+		start = end;
+	}
+	fin[k] = NULL;
+	return (fin);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
 	char	**fin;
 
-	i = 0;
-	k = 0;
 	fin = (char **)malloc((counter(s, c) + 1) * sizeof(char *));
 	if (!s || !fin)
 		return (NULL);
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		j = i;
-		while (s[i] && s[i] != c)
-			i++;
-		if (i > j)
-		{
-			fin[k] = ft_coping(s + j, i - j);
-			k++;
-		}
-	}
-	fin[k] = NULL;
+	ft_create(fin, c, s);
 	return (fin);
 }
 
@@ -78,7 +74,7 @@ char	**ft_split(char const *s, char c)
 	char	*str;
 	char	c;
 
-	str = "Hello, how are you?";
+	str = "      split       this for   me  !       ";
 	c = ' ';
 	result = ft_split(str, c);
 	if (result != NULL)
