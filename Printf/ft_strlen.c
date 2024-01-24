@@ -6,7 +6,7 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:09:10 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/24 18:09:47 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:33:40 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,12 @@
 
 int	ft_strlen(char *s)
 {
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
