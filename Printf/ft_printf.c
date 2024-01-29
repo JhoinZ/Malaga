@@ -6,52 +6,30 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:06:20 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/29 17:32:39 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/29 19:30:46 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-int var_type(char c, va_list args)
+int	var_type(char c, va_list args)
 {
 	if (c == 'c')
-		return ;	
+		return (ft_putchar(va_arg(args, int)));
 	if (c == 's')
-		return ;
+		return (ft_putstr(va_arg(args, char *)));
 	if (c == 'p')
-		return ;
-	if (c == 'd')
-		return ;
-	if (c == 'i')
-		return ;
+		return (ft_void_hexa(va_arg(args, void *)));
+	if (c == 'd' || c == 'i')
+		return (ft_putnbr(va_arg(args, int)));
 	if (c == 'u')
-		return ;
+		return (ft_unsigndec(va_arg(args, unsigned int)));
 	if (c == 'x')
-		return ;
+		return (ft_lowhexa(va_arg(args, int)));
 	if (c == 'X')
-		return ;
+		return (ft_upphexa(va_arg(args, int)));
 	if (c == '%')
-		return ;
-}
-
-int	percentual(char c, va_list args)
-{
-	int len;
-
-	len = 0;
-	if (c != '%')
-	{
-		len = var_type(c, args);
-		if (len == -1)
-			return (-1);
-		return (len);
-	}
-	else
-	{
-		if (write(1, &c, 1) != 1)
-			return (-1);
-		return (1);
-	}
+		return (NULL);
 }
 
 int	write_str(const char *s, va_list args, int len)
@@ -63,7 +41,7 @@ int	write_str(const char *s, va_list args, int len)
 	{
 		if (s[i] == '%')
 		{
-			len = len + percentual(s[i + 1], args);
+			len = len + var_type(s[i + 1], args);
 			if (len == -1)
 				return (-1);
 			i++;

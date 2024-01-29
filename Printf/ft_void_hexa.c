@@ -1,33 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_void_hexa.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 18:13:46 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/29 19:02:08 by fsaffiri         ###   ########.fr       */
+/*   Created: 2024/01/29 19:05:23 by fsaffiri          #+#    #+#             */
+/*   Updated: 2024/01/29 19:06:29 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *s)
+int	ft_void_hexa(void *p)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s)
-	{
-		if (write (1, "(null)", 6) != 6)
-			return (-1);
-		return (6);
-	}
-	while (s[i])
-	{
-		if (write(1, &s[i], 1) != 1)
-			return (-1);
-		i++;
-	}
-	return (i);
 }

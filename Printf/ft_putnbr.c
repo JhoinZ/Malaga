@@ -6,11 +6,11 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:10:54 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/29 17:32:55 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/29 19:02:20 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	int_min(int n)
 {

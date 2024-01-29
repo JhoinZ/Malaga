@@ -6,11 +6,11 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:12:22 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/29 16:10:08 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/29 19:02:29 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putchar(char c)
 {
