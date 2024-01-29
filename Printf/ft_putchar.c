@@ -6,16 +6,15 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:12:22 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/24 18:36:00 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:10:08 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_putchar(char c, int fd)
+int	ft_putchar(char c)
 {
-	if (fd >= 0)
-	{
-		write(fd, &c, 1);
-	}
+	if (write (1, &c, 1) != 1)
+		return (-1);
+	return (1);
 }

@@ -6,33 +6,45 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:10:54 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/24 18:35:43 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:32:55 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_putnbr(int n, int fd)
+static int	int_min(int n)
 {
+	(void)n;
+	if (write(1, "-2147483648", 11) != 11)
+		return (-1);
+	return (11);
+}
+
+int	ft_putnbr(int n)
+{
+	int	let;
+
+	let = 0;
 	if (n == -2147483648)
+		return (int_min(n));
+	if (n < 0 && ++let)
 	{
-		ft_putchar('-', fd);
-		ft_putnbr(214748364, fd);
-		ft_putchar('8', fd);
+		if (write(1, "-", 1) != 1)
+			return (-1);
+		n = -n;
 	}
-	else if (n < 0)
+	if (n > 9)
 	{
-		ft_putchar('-', fd);
-		n *= -1;
-		ft_putnbr(n, fd);
+		let += ft_putnbr(n / 10);
+		if (let == -1)
+			return (-1);
+		n = n % 10;
 	}
-	else if (n > 9)
+	if (n <= 9)
 	{
-		ft_putnbr((n / 10), fd);
-		ft_putchar((n % 10 + '0'), fd);
+		if (ft_putchar (('0' + n)) == -1)
+			return (-1);
+		let++;
 	}
-	else
-	{
-		ft_putchar((n + '0'), fd);
-	}
+	return (let);
 }

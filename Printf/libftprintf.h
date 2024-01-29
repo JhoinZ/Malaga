@@ -6,7 +6,7 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:01:18 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/24 18:29:04 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:54:52 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 int		ft_printf(const char *s, ...);
 int		ft_strlen(char *s);
-void	ft_putnbr(int n, int fd);
-void	ft_putchar(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putnbr(int n);
+int		ft_putchar(char c);
+int		ft_putstr(char *s);
 
 #endif

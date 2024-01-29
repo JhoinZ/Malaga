@@ -6,23 +6,28 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:13:46 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/24 18:34:01 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:32:53 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_putstr(char *s, int fd)
+int	ft_putstr(char *s)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
-	if (fd >= 0)
+	if (!s)
 	{
-		while (s[i] != '\0')
-		{
-			write(fd, &s[i], 1);
-			i++;
-		}
+		if (write (1, "(null)", 6) != 6)
+			return (-1);
+		return (6);
 	}
+	while (s[i])
+	{
+		if (write(1, &s[i], 1) != 1)
+			return (-1);
+		i++;
+	}
+	return (i);
 }
