@@ -6,30 +6,32 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:06:20 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/29 19:30:46 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:44:07 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	var_type(char c, va_list args)
+int	var_type(char c, va_list args, int len)
 {
 	if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
-	if (c == 's')
+	else if (c == 's')
 		return (ft_putstr(va_arg(args, char *)));
-	if (c == 'p')
+	else if (c == 'p')
 		return (ft_void_hexa(va_arg(args, void *)));
-	if (c == 'd' || c == 'i')
+	else if (c == 'd' || c == 'i')
 		return (ft_putnbr(va_arg(args, int)));
-	if (c == 'u')
+	else if (c == 'u')
 		return (ft_unsigndec(va_arg(args, unsigned int)));
-	if (c == 'x')
+	else if (c == 'x')
 		return (ft_lowhexa(va_arg(args, int)));
-	if (c == 'X')
+	else if (c == 'X')
 		return (ft_upphexa(va_arg(args, int)));
-	if (c == '%')
-		return (NULL);
+	else if (c == '%')
+		return (ft_putchar('%'));
+	else
+		return (0);
 }
 
 int	write_str(const char *s, va_list args, int len)
@@ -41,7 +43,7 @@ int	write_str(const char *s, va_list args, int len)
 	{
 		if (s[i] == '%')
 		{
-			len = len + var_type(s[i + 1], args);
+			len = len + var_type(s[i + 1], args, len);
 			if (len == -1)
 				return (-1);
 			i++;
