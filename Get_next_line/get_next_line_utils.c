@@ -6,7 +6,7 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:46:19 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/01/25 16:46:20 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:53:19 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,3 @@ char	*ft_strchr(const char *s, int c)
 		return (&ptr[i]);
 	return (NULL);
 }
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	unsigned int	i;
-	char			*ptr;
-
-	i = 0;
-	ptr = (char *)malloc(count * size);
-	if (ptr == NULL)
-		return (NULL);
-	while (i < count * size)
-	{
-		ptr[i] = 0;
-		i++;
-	}
-	return (ptr);
-}
-
