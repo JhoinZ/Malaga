@@ -6,17 +6,17 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:45:42 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/01 17:10:20 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:17:36 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*taglio(static char *cont)
+char	*taglio(char *cont)
 {
-	size_t	num;
-	char	*tmp;
-	char	*new;
+	unsigned int	i;
+	char			*tmp;
+	char			*new;
 
 	tmp = ft_strchr(cont, '\n');
 	if (tmp == NULL)
@@ -25,20 +25,31 @@ char	*taglio(static char *cont)
 		if (tmp == NULL)
 			return (NULL);
 	}
-	num = ft_strlen(tmp);
-	new = malloc(num * sizeof(char *));
-	if (!num)
+	new = malloc(ft_strlen(tmp) * sizeof(char *));
+	if (!new)
 		return (NULL);
-	new = tmp;
+	i = 0;
+	while (tmp[i] != '\0')
+	{
+		new[i] = tmp[i];
+		i++;
+	}
+	new[i] = '\0';
 	return (new);
 }
 
-char	*read_buff(int fd, static char *cont)
+char	*read_buff(int fd, char *cont)
 {
 	size_t	num;
+	char	*copy;
 
-	num = read(fd, cont, BUFFER_SIZE);
-	return (num);
+	copy = malloc((BUFFER_SIZE + 1) * sizeof(char *));
+	if (!copy)
+		return (NULL);
+	num = read(fd, copy, BUFFER_SIZE);
+	if (num < 0)
+		return (NULL);
+	return (cont);
 }
 
 char	*get_next_line(int fd)
@@ -52,6 +63,21 @@ char	*get_next_line(int fd)
 	if (!cont)
 		return (NULL);
 	next = taglio(cont);
-	cont = buffer_left(cont);
 	return (next);
+}
+
+int	main(void)
+{
+	int		fd;
+	char	*line;
+
+	fd = open("/Users/fsaffiri/Corso/Get_next_line/test.txt", O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s\n", line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (0);
 }
