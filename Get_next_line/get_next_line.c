@@ -6,67 +6,43 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:45:42 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/02 17:17:36 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:59:53 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*taglio(char *cont)
+char	*read_buff(int fd, static char *buff, char *next)
 {
-	unsigned int	i;
-	char			*tmp;
-	char			*new;
-
-	tmp = ft_strchr(cont, '\n');
-	if (tmp == NULL)
-	{
-		tmp = ft_strchr(cont, '\0');
-		if (tmp == NULL)
-			return (NULL);
-	}
-	new = malloc(ft_strlen(tmp) * sizeof(char *));
-	if (!new)
-		return (NULL);
-	i = 0;
-	while (tmp[i] != '\0')
-	{
-		new[i] = tmp[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
-}
-
-char	*read_buff(int fd, char *cont)
-{
-	size_t	num;
+	size_t	read_buff;
 	char	*copy;
 
-	copy = malloc((BUFFER_SIZE + 1) * sizeof(char *));
-	if (!copy)
-		return (NULL);
-	num = read(fd, copy, BUFFER_SIZE);
-	if (num < 0)
-		return (NULL);
-	return (cont);
+	while (!ft_strchr(copy, '\n'))
+	{
+		num = read(fd, copy, BUFFER_SIZE);
+		if (num > 0)
+			copy[num] = '\0';
+		else
+			return (NULL);
+	}
+	free(copy);
+	return (buff);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*cont;
+	static char	*buff;
 	char		*next;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	cont = read_buff(fd, cont);
-	if (!cont)
+	buff = read_buff(fd, buff, next);
+	if (!buff)
 		return (NULL);
-	next = taglio(cont);
 	return (next);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	int		fd;
 	char	*line;
@@ -80,4 +56,4 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}
+} */

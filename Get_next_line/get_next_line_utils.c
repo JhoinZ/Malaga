@@ -6,7 +6,7 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:46:19 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/01 13:53:19 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:37:11 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,50 @@ char	*ft_strchr(const char *s, int c)
 	if (ptr[i] == (unsigned char)c)
 		return (&ptr[i]);
 	return (NULL);
+}
+
+char	*ft_strjoin(char *cat, char *dest, char *src)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if (!src)
+		return (dest);
+	while (src[i] != '\0')
+	{
+		cat[i] = src[i];
+		i++;
+	}
+	while (dest[j] != '\0')
+	{
+		cat[i] = dest[j];
+		i++;
+		j++;
+	}
+	cat[i] = '\0';
+	return (cat);
+}
+
+char	*ft_strcat_mal(char *dest, char *src)
+{
+	char	*cat;
+
+	if (!src)
+		return (NULL);
+	if (!dest)
+	{
+		dest = malloc((ft_strlen(src) + 2), sizeof(char));
+		if (!dest)
+			return (NULL);
+	}
+	cat = malloc((ft_strlen(src) + ft_strlen(dest) + 2), sizeof(char));
+	if (!cat)
+	{
+		return (free(dest), NULL);
+	}
+	cat = ft_strjoin(cat, src, dest);
+	free(dest);
+	return (cat);
 }
