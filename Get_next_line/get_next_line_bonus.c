@@ -6,7 +6,7 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 18:19:34 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/18 18:22:46 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:34:10 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buff[fd] = read_buff(fd, buff[fd]);
-	if (!buff)
+	if (!buff[fd])
 		return (NULL);
 	next = new_line(buff[fd]);
 	buff[fd] = buffer_left(buff[fd]);
