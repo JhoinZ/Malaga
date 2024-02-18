@@ -6,7 +6,7 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:46:19 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/15 16:37:11 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/02/18 17:43:47 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,37 @@ size_t	ft_strlen(const char *s)
 
 char	*ft_strchr(const char *s, int c)
 {
-	unsigned int	i;
-	char			*ptr;
+	int	i;
 
-	ptr = (char *)s;
 	i = 0;
-	while (ptr[i] != '\0')
+	if (s == NULL || s[0] == '\0')
+		return (NULL);
+	while (s[i] != '\0')
 	{
-		if (ptr[i] == (unsigned char)c)
-			return (&ptr[i]);
+		if (s[i] == (unsigned char)c)
+			return ((char *)&s[i]);
 		i++;
 	}
-	if (ptr[i] == (unsigned char)c)
-		return (&ptr[i]);
-	return (NULL);
+	if (s[i] == (unsigned char)c)
+		return ((char *)&s[i]);
+	return (0);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	size_t	i;
+	char	*array;
+
+	i = 0;
+	array = (char *)malloc(count * size);
+	if (!array)
+		return (0);
+	while (i < count * size)
+	{
+		array[i] = 0;
+		i++;
+	}
+	return (array);
 }
 
 char	*ft_strjoin(char *cat, char *dest, char *src)
@@ -74,11 +91,11 @@ char	*ft_strcat_mal(char *dest, char *src)
 		return (NULL);
 	if (!dest)
 	{
-		dest = malloc((ft_strlen(src) + 2), sizeof(char));
+		dest = malloc((ft_strlen(src) + 2) * sizeof(char));
 		if (!dest)
 			return (NULL);
 	}
-	cat = malloc((ft_strlen(src) + ft_strlen(dest) + 2), sizeof(char));
+	cat = malloc((ft_strlen(src) + ft_strlen(dest) + 2) * sizeof(char));
 	if (!cat)
 	{
 		return (free(dest), NULL);
