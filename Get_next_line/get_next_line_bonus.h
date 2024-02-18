@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 16:46:36 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/18 18:18:36 by fsaffiri         ###   ########.fr       */
+/*   Created: 2024/02/18 18:20:29 by fsaffiri          #+#    #+#             */
+/*   Updated: 2024/02/18 18:23:30 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE 
 #  define BUFFER_SIZE 1000
+# endif
+# ifndef MAX_FD
+#  define MAX_FD 1000
 # endif
 # include <fcntl.h>
 # include <stdarg.h>
