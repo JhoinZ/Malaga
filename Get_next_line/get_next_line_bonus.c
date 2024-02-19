@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 18:19:34 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/18 18:34:10 by fsaffiri         ###   ########.fr       */
+/*   Created: 2024/02/19 15:31:44 by fsaffiri          #+#    #+#             */
+/*   Updated: 2024/02/19 15:35:07 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,29 @@
 
 char	*buffer_left(char *buff)
 {
-	int		len_buff;
 	int		i;
+	int		j;
 	char	*new_buff;
 
-	len_buff = 0;
-	while (buff[len_buff] != '\n' && buff[len_buff] != '\0')
-		len_buff++;
-	if (buff[len_buff] == '\0')
-		return (free(buff), NULL);
-	if (buff[len_buff] == '\n')
-		len_buff++;
-	new_buff = ft_calloc((ft_strlen(buff) - len_buff + 1), sizeof(char));
+	i = 0;
+	if (!buff)
+		return (NULL);
+	while (buff[i] != '\n' && buff[i])
+		i++;
+	if (!buff[i])
+	{
+		free(buff);
+		return (NULL);
+	}
+	new_buff = ft_calloc(sizeof(char), (ft_strlen(buff) - i + 1));
 	if (!new_buff)
 		return (free(buff), NULL);
-	i = 0;
-	while (buff[len_buff] != '\0')
-	{
-		new_buff[i] = buff[len_buff];
-		i++;
-		len_buff++;
-	}
-	new_buff[i] = '\0';
-	free(buff);
-	return (new_buff);
+	i += 1;
+	j = 0;
+	while (buff[i])
+		new_buff[j++] = buff[i++];
+	new_buff[j] = '\0';
+	return (free(buff), new_buff);
 }
 
 char	*new_line(char *buff)
@@ -51,17 +50,17 @@ char	*new_line(char *buff)
 	i = 0;
 	while (buff[i] != '\n' && buff[i] != '\0')
 		i++;
-	if (buff[i] == '\n')
-		i++;
-	newline = ft_calloc((i + 1), sizeof(char));
+	newline = ft_calloc(sizeof(char), (i + 2));
 	if (!newline)
 		return (NULL);
 	j = 0;
-	while (i > j)
+	while (buff[j] != '\n' && buff[j] != '\0')
 	{
 		newline[j] = buff[j];
 		j++;
 	}
+	if (buff[j] == '\n')
+		newline[j++] = '\n';
 	newline[j] = '\0';
 	return (newline);
 }
@@ -73,16 +72,17 @@ static char	*read_buff(int fd, char *buff)
 
 	copy = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	if (!copy)
-		return (free(buff), NULL);
+		return (NULL);
 	bytes_read = 1;
-	while (!ft_strchr(copy, '\n') && bytes_read > 0)
+	if (!buff)
+		buff = ft_strdup("");
+	while (!ft_strchr(buff, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, copy, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (free(buff), free(copy), NULL);
 		copy[bytes_read] = '\0';
-		if (copy[0] != '\0')
-			buff = ft_strcat_mal(buff, copy);
+		buff = ft_strjoin(copy, buff);
 	}
 	return (free(copy), buff);
 }
@@ -93,7 +93,7 @@ char	*get_next_line(int fd)
 	char		*next;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (free(buff[fd]), NULL);
 	buff[fd] = read_buff(fd, buff[fd]);
 	if (!buff[fd])
 		return (NULL);

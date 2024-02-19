@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 18:20:29 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/18 18:23:30 by fsaffiri         ###   ########.fr       */
+/*   Created: 2024/02/19 15:32:15 by fsaffiri          #+#    #+#             */
+/*   Updated: 2024/02/19 15:35:19 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
+int		ft_strlen(char *s);
+char	*ft_strchr(char *s, int c);
+char	*ft_strjoin(char *bff, char *nl);
+char	*ft_strdup(const char *s1);
 void	*ft_calloc(size_t count, size_t size);
-char	*ft_strcat_mal(char *dest, char *src);
-char	*ft_strjoin(char *cat, char *dest, char *src);
 
 #endif
