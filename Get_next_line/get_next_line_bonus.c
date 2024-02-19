@@ -6,7 +6,7 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:31:44 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/19 15:35:07 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:15:16 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,15 @@ static char	*read_buff(int fd, char *buff)
 
 char	*get_next_line(int fd)
 {
-	static char	*buff[MAX_FD];
+	static char	*buff[MAX_FD] = {NULL};
 	char		*next;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (free(buff[fd]), NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buff[fd], 0) < 0)
+	{
+		free(buff[fd]);
+		buff[fd] = NULL;
+		return (NULL);
+	}
 	buff[fd] = read_buff(fd, buff[fd]);
 	if (!buff[fd])
 		return (NULL);

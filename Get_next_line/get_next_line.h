@@ -6,14 +6,14 @@
 /*   By: fsaffiri <fsaffiri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:46:36 by fsaffiri          #+#    #+#             */
-/*   Updated: 2024/02/19 15:35:34 by fsaffiri         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:02:08 by fsaffiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE 
-#  define BUFFER_SIZE 500
+#  define BUFFER_SIZE 1000
 # endif
 # include <fcntl.h>
 # include <stdarg.h>
